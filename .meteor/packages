@@ -8,3 +8,7 @@ meteor-platform
 accounts-ui
 accounts-github
 service-configuration
+
+iron:router
+insecure
+autopublish

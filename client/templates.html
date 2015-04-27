@@ -1,0 +1,57 @@
+
+<!-- TEMPLATES -->
+
+<!-- boilerplate
+<template name="">
+
+</template>
+-->
+
+<template name="nav">
+  <div class="ui vertical menu">
+    {{#if isUserLoggedIn }}
+    <a class="teal item">
+      Forums
+      <div class="ui teal label">1</div>
+    </a>
+    <a class="item">
+      Spam
+      <div class="ui label">51</div>
+    </a>
+    <a class="item">
+      Updates
+      <div class="ui label">1</div>
+    </a>
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Search mail...">
+        <i class="search icon"></i>
+      </div>
+    </div>
+    {{else}}
+    <a class="teal item" href="/login">
+      Log in
+    </a>
+  {{/if}}
+  </div>
+</template>
+
+<template name="login">
+{{> loginButtons }}
+</template>
+
+<template name="forums">
+this a a forums list template
+</template>
+
+<template name="forum">
+this is a forum template
+</template>
+
+<template name="question">
+this is a question
+</template>
+
+<template name="submitBox">
+this is a submission box
+</template>

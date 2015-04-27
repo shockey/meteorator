@@ -1,0 +1,23 @@
+<!-- main reusable site layout -->
+<template name="mainLayout">
+<head>
+  <title>cometQ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.css" />
+  <link rel="stylesheet" href="/cometq.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.min.js"></script>
+</head>
+
+<body>
+
+  
+  <div class="ui page grid">
+    <div class="four wide column">
+      <h1>CometQ</h1>
+      {{> nav}}
+    </div>
+    <div class="twelve wide column">
+      {{> yield}}
+    </div>
+  </div>
+</body>
+</template>
