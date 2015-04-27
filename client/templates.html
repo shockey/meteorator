@@ -10,17 +10,12 @@
 <template name="nav">
   <div class="ui vertical menu">
     {{#if isUserLoggedIn }}
-    <a class="teal item">
+    <a class="teal item" href="/">
       Forums
-      <div class="ui teal label">1</div>
+      <div class="ui teal label">{{forumCount}}</div>
     </a>
     <a class="item">
-      Spam
-      <div class="ui label">51</div>
-    </a>
-    <a class="item">
-      Updates
-      <div class="ui label">1</div>
+      Create New Forum
     </a>
     <div class="item">
       <div class="ui transparent icon input">
@@ -28,6 +23,9 @@
         <i class="search icon"></i>
       </div>
     </div>
+    <a class="teal item" href="/logout">
+      Log out
+    </a>
     {{else}}
     <a class="teal item" href="/login">
       Log in
@@ -41,7 +39,10 @@
 </template>
 
 <template name="forums">
-this a a forums list template
+<h3>Forums</h3>
+{{#each forums}} 
+  <div>{{name}}</div>
+{{/each}}
 </template>
 
 <template name="forum">
@@ -54,4 +55,9 @@ this is a question
 
 <template name="submitBox">
 this is a submission box
+</template>
+
+<template name="createNew">
+  <h3>Create Forum</h3>
+
 </template>

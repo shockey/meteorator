@@ -2,3 +2,7 @@
 h1 {
   text-align: left;
 }
+
+#mainGrid {
+  padding-top: 15px;
+}

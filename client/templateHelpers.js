@@ -7,5 +7,14 @@ Template.nav.helpers({
     } else{
       return false;
     }
+  },
+  forumCount: function() {
+    return Forums.find().count();
+  }
+});
+
+Template.forums.helpers({
+  forums: function(){
+    return Forums.find();
   }
 });
