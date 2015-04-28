@@ -18,9 +18,11 @@ Router.route('/create', function () {
 });
 
 Router.route('/logout', function () {
-  Meteor.logout(function() {
-    this.redirect('/');
+  var context = this;
+  Meteor.logout(function(context) {
+    context.redirect('/login');
   })
+  this.redirect("/login");
 });
 
 
