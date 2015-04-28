@@ -14,7 +14,7 @@
       Forums
       <div class="ui teal label">{{forumCount}}</div>
     </a>
-    <a class="item">
+    <a class="item" href="/create">
       Create New Forum
     </a>
     <div class="item">
@@ -41,12 +41,12 @@
 <template name="forums">
 <h3>Forums</h3>
 {{#each forums}} 
-  <div>{{name}}</div>
+  <div><b>{{title}}</b>, by {{ friendlyUsername }}: {{description}}</div>
 {{/each}}
 </template>
 
 <template name="forum">
-this is a forum template
+  <h3>{{title}}</h3>
 </template>
 
 <template name="question">
@@ -58,6 +58,17 @@ this is a submission box
 </template>
 
 <template name="createNew">
-  <h3>Create Forum</h3>
-
+  <h3>Create</h3>
+  <div class="ui large form">
+    <div class="two fields">
+      <div class="field">
+        <input placeholder="Forum Title" type="text" id="newForumTitle">
+      </div>
+    </div>
+    <div class="field">
+      <label></label>
+      <textarea placeholder="Description" id="newForumDescription"></textarea>
+    </div>
+    <div class="ui submit button">Create!</div>
+  </div>
 </template>
