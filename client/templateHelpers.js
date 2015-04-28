@@ -13,7 +13,7 @@ Template.forum.helpers({
 
 Template.questions.helpers({
   getQuestions: function(){
-    return Questions.find({forum: this._id});
+    return Questions.find({forum: this._id}, {sort: {score: -1}});
   },
   isAsker: function(){
     return !!(Meteor.userId() === this.asker)
@@ -75,6 +75,9 @@ Template.forums.events({
 });
 
 Template.forum.events({
+  'click .delete': function(){
+    return Forums.remove({_id: this._id});
+  },
   'click .submit': function(){
     var content = document.getElementById('newQuestion');
 

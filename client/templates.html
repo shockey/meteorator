@@ -29,6 +29,7 @@
     </a>
   {{/if}}
   </div>
+  built by <a href="http://kyleshockey.com/">Kyle Shockey</a> :)
 </template>
 
 <template name="login">
@@ -63,7 +64,7 @@
 
 <template name="forum">
   <h2>{{title}}</h2>
-  {{#if isOwner}}<span class="ui button red tiny">Delete Forum</span>{{/if}}
+  {{#if isOwner}}<span class="ui button red tiny delete">Delete Forum</span>{{/if}}
   <h5>"{{description}}"</h5>
   {{> submitBox}}
   <div class="ui divider"></div>
