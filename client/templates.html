@@ -72,15 +72,40 @@
 </template>
 
 <template name="questions">
-
+<div class="ui divided items">
  {{#each getQuestions}}
-  <div>"{{content}}"<br>
+<!--   <div>"{{content}}"<br>
   - asked by {{ friendlyUsername }}<br>
   {{#if isAsker}}
   <a href="#" class="deleteQ">Delete</a>
   {{/if}}
+  </div> -->
+
+  <div class="link item">
+
+    <div class="ui tiny image pull-right">
+      <div class="ui statistic small">
+        <div class="value">
+      {{qScore}}
+        </div>
+        <div class="label">
+      score<br>
+      <i class="chevron up icon"></i>
+      <i class="chevron down icon"></i>
+        </div>
+      </div>
+  </div>
+    <div class="content">
+      <h2>"{{content}}"</h2>
+      <div style="color:grey;">asked by {{ friendlyUsername }}</div>
+
+    </div>
+    {{#if isAsker}}
+    <a href="#" class="deleteQ">Delete</a>
+    {{/if}}
   </div>
   {{/each}}
+  </div>
 </template>
 
 <template name="submitBox">
