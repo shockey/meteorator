@@ -8,6 +8,12 @@ Template.forum.helpers({
   },
   isOwner: function(){
     return !!(Meteor.userId() === this.owner)
+  },
+  isVoteable: function(){
+    return Forums.findOne(this._id).voteable;
+  },
+  isEditable: function(){
+    return Forums.findOne(this._id).editable;
   }
 });
 
@@ -23,6 +29,10 @@ Template.questions.helpers({
   },
   qScore: function(){
     return this.score;
+  },
+  isVoteable: function(){
+    console.log(this);
+    return Forums.findOne(this.forum).voteable;
   }
 });
 
@@ -108,7 +118,9 @@ Template.createNew.events({
     Forums.insert({
       title: title.value,
       description: desc.value,
-      owner: Meteor.userId()
+      owner: Meteor.userId(),
+      editable: true,
+      voteable: true
     }, function() {
       title.value = "";
       desc.value = "";
@@ -150,4 +162,32 @@ Template.questions.events({
     Questions.update({_id: this._id},{$pull: {upvoters: Meteor.userId()}})
     Questions.update({_id: this._id},{$pull: {downvoters: Meteor.userId()}})
   }
+})
+
+Template.forumOwnerControls.events({
+  'click #submissionsCtrl': function(event){
+    if(event.target.textContent === "New Submissions Off") {
+      $(event.target).addClass('green');
+      $(event.target).text('New Submissions On');
+      Forums.update({_id: this._id},{$set: {editable: true}});
+
+    } else {
+      $(event.target).removeClass('green');
+      $(event.target).text('New Submissions Off');
+      Forums.update({_id: this._id},{$set: {editable: false}});
+
+    }
+  },
+  'click #votingCtrl': function(){
+    if(event.target.textContent === "Voting Off") {
+      $(event.target).addClass('green');
+      $(event.target).text('Voting On');
+      Forums.update({_id: this._id},{$set: {voteable: true}});
+    } else {
+      $(event.target).removeClass('green');
+      $(event.target).text('Voting Off');
+      Forums.update({_id: this._id},{$set: {voteable: false}});
+    }
+  },
+
 })
