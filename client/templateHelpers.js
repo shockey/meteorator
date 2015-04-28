@@ -3,7 +3,6 @@
 Template.prototype.helpers
 
 Template.forum.helpers({
-
   friendlyUsername: function() {
     return Meteor.users.findOne({_id: this.asker}).profile.name;
   },
@@ -51,6 +50,18 @@ Template.forums.helpers({
   },
   questionCount: function() {
     return Questions.find({forum: this._id}).count();
+  }
+});
+
+Template.submitBox.helpers({
+  isUserLoggedIn: function() {
+    var user = Meteor.user();
+
+    if(user) {
+      return true;
+    } else{
+      return false;
+    }
   }
 });
 

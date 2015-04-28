@@ -63,7 +63,7 @@
 
 <template name="forum">
   <h2>{{title}}</h2>
-  <span class="ui button red tiny">Delete Forum</span>
+  {{#if isOwner}}<span class="ui button red tiny">Delete Forum</span>{{/if}}
   <h5>"{{description}}"</h5>
   {{> submitBox}}
   <div class="ui divider"></div>
@@ -84,6 +84,7 @@
 </template>
 
 <template name="submitBox">
+  {{#if isUserLoggedIn}}
   <div class="ui form">
     <div class="field">
       <label></label>
@@ -91,6 +92,7 @@
     </div>
     <div class="ui submit button">Submit!</div>
   </div>
+  {{/if}}
 </template>
 
 <template name="404">
