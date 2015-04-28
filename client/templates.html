@@ -43,15 +43,33 @@
 </template>
 
 <template name="forum">
-  <h3>{{title}}</h3>
+  <h2>{{title}}</h2>
+  {{> submitBox}}
+  <div class="ui divider"></div>
+
+  {{#each questions}}
+  <div>"{{content}}"<br>
+  - asked by {{ friendlyUsername }}<br>
+  {{#if isAsker}}
+
+  <a href="#" class="deleteQ">Delete</a>
+  {{/if}}
+  </div>
+  {{/each}}
 </template>
 
-<template name="question">
+<!-- <template name="question">
 this is a question
-</template>
+</template> -->
 
 <template name="submitBox">
-this is a submission box
+  <div class="ui form">
+    <div class="field">
+      <label></label>
+      <textarea rows="2" placeholder="Type your question here!" id="newQuestion"></textarea>
+    </div>
+    <div class="ui submit button">Submit!</div>
+  </div>
 </template>
 
 <template name="404">
