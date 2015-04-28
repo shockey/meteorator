@@ -22,9 +22,7 @@ Template.questions.helpers({
     return Meteor.users.findOne({_id: this.asker}).profile.name;
   },
   qScore: function(){
-    console.log(this);
-    console.log(this.upvoters);
-    return this.upvoters.length - this.downvoters.length;
+    return this.score;
   }
 });
 
@@ -85,7 +83,8 @@ Template.forum.events({
       asker: Meteor.userId(),
       forum: this._id,
       upvoters: [],
-      downvoters: []
+      downvoters: [],
+      score: 0
     }, function(){
       content.value = "";
     })
@@ -117,18 +116,35 @@ Template.createNew.events({
 Template.questions.events({
   'click .up': function(){
     if(this.upvoters.indexOf(Meteor.userId()) === -1) {
+      if(this.downvoters.indexOf(Meteor.userId()) !== -1) {
+        Questions.update({_id: this._id},{$set: {score: this.score + 2}})
+
+      } else {
+        Questions.update({_id: this._id},{$set: {score: this.score + 1}})
+      }
       Questions.update({_id: this._id},{$pull: {downvoters: Meteor.userId()}})
       Questions.update({_id: this._id},{$push: {upvoters: Meteor.userId()}})
     }
   },
   'click .down': function(){
     if(this.downvoters.indexOf(Meteor.userId()) === -1) {
+      if(this.upvoters.indexOf(Meteor.userId()) !== -1) {
+        Questions.update({_id: this._id},{$set: {score: this.score - 2}})
+      } else {
+        Questions.update({_id: this._id},{$set: {score: this.score - 1}})
+      }
       Questions.update({_id: this._id},{$pull: {upvoters: Meteor.userId()}})
       Questions.update({_id: this._id},{$push: {downvoters: Meteor.userId()}})
     }
   },
   'click .value': function(){
-      Questions.update({_id: this._id},{$pull: {upvoters: Meteor.userId()}})
-      Questions.update({_id: this._id},{$pull: {downvoters: Meteor.userId()}})
+    if(this.upvoters.indexOf(Meteor.userId()) !== -1) {
+      Questions.update({_id: this._id},{$set: {score: this.score - 1}})
+    }
+    if(this.downvoters.indexOf(Meteor.userId()) !== -1) {
+      Questions.update({_id: this._id},{$set: {score: this.score + 1}})
+    }
+    Questions.update({_id: this._id},{$pull: {upvoters: Meteor.userId()}})
+    Questions.update({_id: this._id},{$pull: {downvoters: Meteor.userId()}})
   }
 })
