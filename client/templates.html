@@ -63,24 +63,25 @@
 
 <template name="forum">
   <h2>{{title}}</h2>
+  <span class="ui button red tiny">Delete Forum</span>
   <h5>"{{description}}"</h5>
   {{> submitBox}}
   <div class="ui divider"></div>
 
-  {{#each questions}}
+ {{> questions }}
+</template>
+
+<template name="questions">
+
+ {{#each getQuestions}}
   <div>"{{content}}"<br>
   - asked by {{ friendlyUsername }}<br>
   {{#if isAsker}}
-
   <a href="#" class="deleteQ">Delete</a>
   {{/if}}
   </div>
   {{/each}}
 </template>
-
-<!-- <template name="question">
-this is a question
-</template> -->
 
 <template name="submitBox">
   <div class="ui form">

@@ -3,16 +3,29 @@
 Template.prototype.helpers
 
 Template.forum.helpers({
-  questions: function(){
+
+  friendlyUsername: function() {
+    return Meteor.users.findOne({_id: this.asker}).profile.name;
+  },
+  isOwner: function(){
+    return !!(Meteor.userId() === this.owner)
+  }
+});
+
+Template.questions.helpers({
+  getQuestions: function(){
     return Questions.find({forum: this._id});
+  },
+  isAsker: function(){
+    return !!(Meteor.userId() === this.asker)
   },
   friendlyUsername: function() {
     return Meteor.users.findOne({_id: this.asker}).profile.name;
   },
-  isAsker: function(){
-    return !!(Meteor.userId() === this.asker)
+  qScore: function(){
+    return this.upvoters.length - this.downvoters.length;
   }
-})
+});
 
 Template.nav.helpers({
   isUserLoggedIn: function() {
@@ -57,7 +70,9 @@ Template.forum.events({
     Questions.insert({
       content: content.value,
       asker: Meteor.userId(),
-      forum: this._id
+      forum: this._id,
+      upvoters: [],
+      downvoters: []
     }, function(){
       content.value = "";
     })
