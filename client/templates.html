@@ -37,13 +37,33 @@
 
 <template name="forums">
 <h3>Forums</h3>
+<div class="ui divided items">
 {{#each forums}} 
-  <div><b><a href={{_id}}>{{title}}</a></b>, by {{ friendlyUsername }}: {{description}}. <a href="#" class="delete">Delete</a></div>
+    <div class="link item">
+      <div class="ui tiny image">
+        <div class="ui statistic tiny">
+          <div class="value">
+        {{questionCount}}
+          </div>
+          <div class="label">
+        Questions
+          </div>
+        </div>
+    </div>
+      <div class="content">
+        <a class="header" href={{_id}}>{{title}} <span style="color:grey; font-size: .8em;"> by {{friendlyUsername}}</span></a>
+        <div class="description">
+          {{description}}
+        </div>
+      </div>
+    </div>
 {{/each}}
+</div>
 </template>
 
 <template name="forum">
   <h2>{{title}}</h2>
+  <h5>"{{description}}"</h5>
   {{> submitBox}}
   <div class="ui divider"></div>
 

@@ -1,5 +1,7 @@
 //////// HELPERS
 
+Template.prototype.helpers
+
 Template.forum.helpers({
   questions: function(){
     return Questions.find({forum: this._id});
@@ -33,6 +35,9 @@ Template.forums.helpers({
   },
   friendlyUsername: function() {
     return Meteor.users.findOne({_id: this.owner}).profile.name;
+  },
+  questionCount: function() {
+    return Questions.find({forum: this._id}).count();
   }
 });
 
