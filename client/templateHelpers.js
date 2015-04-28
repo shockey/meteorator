@@ -1,6 +1,6 @@
 //////// HELPERS
 
-Template.prototype.helpers
+
 
 Template.forum.helpers({
   friendlyUsername: function() {
