@@ -1,3 +1,9 @@
+//////// HELPERS
+
+Template.forum.helpers({
+  
+})
+
 Template.nav.helpers({
   isUserLoggedIn: function() {
     var user = Meteor.user();
@@ -22,14 +28,30 @@ Template.forums.helpers({
   }
 });
 
+//////// EVENTS
+
+Template.forums.events({
+  'click .delete': function() {
+    console.log(Forums);
+    Forums.remove({_id: this._id});
+  }
+})
+
 Template.createNew.events({
   'click .submit': function(){
-    var title = document.getElementById('newForumTitle').value;
-    var desc = document.getElementById('newForumDescription').value;
+    var title = document.getElementById('newForumTitle');
+    var desc = document.getElementById('newForumDescription');
+    if(title.value === "" || desc.value === "") {
+      alert("Fill out the form, yo!");
+      return;
+    }
     Forums.insert({
-      title: title,
-      description: desc,
+      title: title.value,
+      description: desc.value,
       owner: Meteor.userId()
+    }, function() {
+      title.value = "";
+      desc.value = "";
     });
   }
 });

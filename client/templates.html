@@ -16,19 +16,16 @@
     </a>
     <a class="item" href="/create">
       Create New Forum
+      <i class="plus icon"></i>
     </a>
-    <div class="item">
-      <div class="ui transparent icon input">
-        <input type="text" placeholder="Search mail...">
-        <i class="search icon"></i>
-      </div>
-    </div>
     <a class="teal item" href="/logout">
       Log out
+      <i class="chevron circle right icon"></i>
     </a>
     {{else}}
     <a class="teal item" href="/login">
       Log in
+      <i class="linkify icon"></i>
     </a>
   {{/if}}
   </div>
@@ -41,7 +38,7 @@
 <template name="forums">
 <h3>Forums</h3>
 {{#each forums}} 
-  <div><b>{{title}}</b>, by {{ friendlyUsername }}: {{description}}</div>
+  <div><b><a href={{_id}}>{{title}}</a></b>, by {{ friendlyUsername }}: {{description}}. <a href="#" class="delete">Delete</a></div>
 {{/each}}
 </template>
 
@@ -55,6 +52,10 @@ this is a question
 
 <template name="submitBox">
 this is a submission box
+</template>
+
+<template name="404">
+404 :(
 </template>
 
 <template name="createNew">
