@@ -10,7 +10,11 @@ Router.route('/', function () {
 
 
 Router.route('/login', function () {
-  this.render('login');
+  if(Meteor.userId()){
+    this.redirect("/");
+  } else {
+    this.render('login');
+  }
 });
 
 Router.route('/create', function () {
