@@ -146,6 +146,8 @@ Template.questions.events({
       }
       Questions.update({_id: this._id},{$pull: {downvoters: Meteor.userId()}})
       Questions.update({_id: this._id},{$push: {upvoters: Meteor.userId()}})
+      $(event.target).addClass('green');
+      $(event.target).siblings('.down').removeClass('red');
     }
   },
   'click .down': function(){
@@ -157,6 +159,8 @@ Template.questions.events({
       }
       Questions.update({_id: this._id},{$pull: {upvoters: Meteor.userId()}})
       Questions.update({_id: this._id},{$push: {downvoters: Meteor.userId()}})
+      $(event.target).addClass('red');
+      $(event.target).siblings('.up').removeClass('green');
     }
   },
   'click .value': function(){
@@ -168,6 +172,8 @@ Template.questions.events({
     }
     Questions.update({_id: this._id},{$pull: {upvoters: Meteor.userId()}})
     Questions.update({_id: this._id},{$pull: {downvoters: Meteor.userId()}})
+    $(event.target).next().children('i').removeClass('green');
+    $(event.target).next().children('i').removeClass('red');
   }
 })
 
@@ -177,7 +183,6 @@ Template.forumOwnerControls.events({
       $(event.target).addClass('green');
       $(event.target).text('New Submissions On');
       Forums.update({_id: this._id},{$set: {editable: true}});
-
     } else {
       $(event.target).removeClass('green');
       $(event.target).text('New Submissions Off');
