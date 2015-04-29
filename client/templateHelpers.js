@@ -1,7 +1,5 @@
 //////// HELPERS
 
-
-
 Template.forum.helpers({
   friendlyUsername: function() {
     return Meteor.users.findOne({_id: this.asker}).profile.name;
@@ -9,6 +7,15 @@ Template.forum.helpers({
   isOwner: function(){
     return !!(Meteor.userId() === this.owner)
   },
+  isVoteable: function(){
+    return Forums.findOne(this._id).voteable;
+  },
+  isEditable: function(){
+    return Forums.findOne(this._id).editable;
+  }
+});
+
+Template.forumOwnerControls.helpers({
   isVoteable: function(){
     return Forums.findOne(this._id).voteable;
   },

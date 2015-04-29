@@ -63,8 +63,16 @@
 </template>
 
 <template name="forumOwnerControls">
+  {{#if isEditable}}
+  <div class="ui button tiny green" id="submissionsCtrl">New Submissions On</div><br>
+  {{else}}
   <div class="ui button tiny" id="submissionsCtrl">New Submissions Off</div><br>
+  {{/if}}
+  {{#if isVoteable}}
+  <div class="ui button tiny green" id="votingCtrl">Voting On</div>
+  {{else}}
   <div class="ui button tiny" id="votingCtrl">Voting Off</div>
+  {{/if}}
   <br>
   <span class="ui button red tiny delete">Delete Forum</span>
 </template>
@@ -74,11 +82,10 @@
   {{#if isOwner}}{{> forumOwnerControls}}{{/if}}
   <h5>"{{description}}"</h5>
   {{#if isEditable}}
-  {{> submitBox}}
+    {{> submitBox}}
   {{/if}}
   <div class="ui divider"></div>
-
- {{> questions }}
+  {{> questions }}
 </template>
 
 <template name="questions">
