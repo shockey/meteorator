@@ -112,8 +112,8 @@
         <div class="label">
       score<br>
       {{#if isVoteable}}
-      <i class="chevron up icon"></i>
-      <i class="chevron down icon"></i>
+      <i class="chevron up icon {{#if hasBeenUpvotedByUser}}green{{/if}}"></i>
+      <i class="chevron down icon {{#if hasBeenDownvotedByUser}}red{{/if}}"></i>
       {{/if}}
         </div>
       </div>

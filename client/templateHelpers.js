@@ -40,6 +40,14 @@ Template.questions.helpers({
   isVoteable: function(){
     console.log(this);
     return Forums.findOne(this.forum).voteable;
+  },
+  hasBeenUpvotedByUser: function(){
+    var i = this.upvoters.indexOf(Meteor.userId());
+    return i > -1 ? true : false;
+  },
+  hasBeenDownvotedByUser: function(){
+    var i = this.downvoters.indexOf(Meteor.userId());
+    return i > -1 ? true : false;
   }
 });
 
