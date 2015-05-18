@@ -39,7 +39,7 @@ Template.questions.helpers({
   },
   isVoteable: function(){
     console.log(this);
-    return Forums.findOne(this.forum).voteable;
+    return Forums.findOne(this.forum).voteable && !!Meteor.userId();
   },
   hasBeenUpvotedByUser: function(){
     var i = this.upvoters.indexOf(Meteor.userId());
